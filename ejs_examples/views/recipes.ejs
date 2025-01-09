@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Recipes</title>
+</head>  
+<body>
+    <h1>Welcome to Dynamic Recipes</h1>
+    <h2>Our amazing recipes:</h2>
+    <ol>
+        <%recipes.forEach(recipe => { %>
+            <li>
+               <h3><%= recipe.name %></h3>
+               <ul>
+                <% recipe.ingredients.forEach(ingredient => { %>
+                    <li>
+                        <strong><%= ingredient.ingName %></strong>
+                        <ul>
+                            <li>Quantitiy: <%= ingredient.quantity %></li>
+                        </ul>
+                    </li>
+                <% }) %> 
+               </ul>
+            </li>
+        <% }) %>
+    </ol>
+    <a href="/">Go back to home page.</a>
+</body>   
+</html>
