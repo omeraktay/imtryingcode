@@ -14,30 +14,30 @@
         <h1><img src="/img/book.png" style="width: 90px; height: auto;">Book Inventory</h1>
        </div>
 
-       <table class="table table-bordered m-4">
-        <thead>
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Serial Number</th>
+            <th>Tags</th>
+            <th>Publisher</th>
+            <th>Inventory</th>
+            <th>Units Sold</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% inventory.forEach(book => { %>
             <tr>
-                <th>ID</th>
-                <th>Serial Number</th>
-                <th>Tags</th>
-                <th>Publisher</th>
-                <th>Inventory</th>
-                <th>Units Sold</th>
+                <th><%- book.id %></th>
+                <th><%- book.serial %></th>
+                <th><%- book.tags %></th>
+                <th><%- book.publishingCompany %></th>
+                <th><%- book.inventory %></th>
+                <th><%- book.unitsSold %></th>
             </tr>
-        </thead>
-        <tbody>
-            <% inventory.forEach(book => { %>
-                <tr>
-                    <td><%- book.id %></td>
-                    <td><%- book.serial %></td>
-                    <td><%- book.tags %></td>
-                    <td><%- book.publishingCompany %></td>
-                    <td><%- book.inventory %></td>
-                    <td><%- book.unitsSold %></td>
-                </tr>
-            <% }) %>
-        </tbody>
-       </table>
+        <% }) %>
+    </tbody>
+</table>       
 
         <%- include('partials/footer') %>
     </body>
