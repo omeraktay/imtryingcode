@@ -1,0 +1,101 @@
+import Book from "./models/Books.js";
+import connectDB from "./config/db.js";
+
+const seedData = [
+    {
+        "id": 11,
+        "serial": "76x87PCY",
+        "tags": ["electronics", "computers"],
+        "publishingCompany": "Pineapple",
+        "inventory": 10,
+        "unitsSold": 5
+    },
+    {
+        "id": 22,
+        "serial": "54z12ABQ",
+        "tags": ["electronics", "audio"],
+        "publishingCompany": "SoundWave",
+        "inventory": 20,
+        "unitsSold": 12
+    },
+    {
+        "id": 33,
+        "serial": "32y45LMN",
+        "tags": ["home appliances", "kitchen"],
+        "publishingCompany": "HomeEase",
+        "inventory": 15,
+        "unitsSold": 8
+    },
+    {
+        "id": 44,
+        "serial": "98t76GHI",
+        "tags": ["electronics", "mobile"],
+        "publishingCompany": "MobileTech",
+        "inventory": 50,
+        "unitsSold": 35
+    },
+    {
+        "id": 55,
+        "serial": "87r21JKL",
+        "tags": ["office supplies", "furniture"],
+        "publishingCompany": "OfficePro",
+        "inventory": 25,
+        "unitsSold": 10
+    },
+    {
+        "id": 66,
+        "serial": "89T65DRQ",
+        "tags": ["electronics", "smartphones"],
+        "publishingCompany": "Orange Tech",
+        "inventory": 50,
+        "unitsSold": 30
+    },
+    {
+        "id": 77,
+        "serial": "45Y76MNB",
+        "tags": ["appliances", "kitchen"],
+        "publishingCompany": "Cherry Home",
+        "inventory": 20,
+        "unitsSold": 5
+    },
+    {
+        "id": 88,
+        "serial": "32X89PKL",
+        "tags": ["electronics", "audio"],
+        "publishingCompany": "Banana Audio",
+        "inventory": 15,
+        "unitsSold": 10
+    },
+    {
+        "id": 99,
+        "serial": "67Z98QWE",
+        "tags": ["furniture", "office"],
+        "publishingCompany": "Grape Interiors",
+        "inventory": 100,
+        "unitsSold": 40
+    },
+    {
+        "id": 100,
+        "serial": "68KL56XE",
+        "tags": ["flooring", "renovation"],
+        "publishingCompany": "Positive",
+        "inventory": 45,
+        "unitsSold": 45
+    }
+];
+
+const seedDB = async () => {
+    try {
+        await connectDB();
+        await Book.deleteMany();
+        await Book.insertMany(seedData);
+        console.log('Data imported successfully.');
+        process.exit();
+    } 
+    catch (err) {
+        console.error(`Error seeding database: ${err.message}`);
+        process.exit(1);
+    }
+};
+
+seedDB();
