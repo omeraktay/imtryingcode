@@ -9,30 +9,30 @@
     </head>
     <body>
         <%- include('partials/header') %>
-        <table class="table table-bordered">
-            <thead>
+       <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Tags</th>
+                <th>Serial Number</th>
+                <th>Publisher</th>
+                <th>Inventory</th>
+                <th>Units Sold</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% inventory.forEach(book => { %>
                 <tr>
-                    <th>ID</th>
-                    <th>Serial Number</th>
-                    <th>Tags</th>
-                    <th>Publisher</th>
-                    <th>Inventory</th>
-                    <th>Units Sold</th>
+                    <td><%- book.id %></td>
+                    <td><%- book.tags %></td>
+                    <td><%- book.serial %></td>
+                    <td><%- book.publishingCompany %></td>
+                    <td><%- book.inventory %></td>
+                    <td><%- book.unitsSold %></td>
                 </tr>
-            </thead>
-            <tbody>
-                <% inventory.forEach((book) => { %>
-                    <tr>
-                        <td><%= book.id %></td>
-                        <td><%= book.serial %></td>
-                        <td><%= book.tags.join(', ') %></td>
-                        <td><%= book.publishingCompany %></td>
-                        <td><%= book.inventory %></td>
-                        <td><%= book.unitsSold %></td>
-                    </tr>
-                <% }); %>
-            </tbody>
-        </table>
+            <% }) %>
+        </tbody>
+       </table>
         <%- include('partials/footer') %>
     </body>
 </html>

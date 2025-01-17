@@ -89,11 +89,11 @@ const seedDB = async () => {
         await connectDB();
         await Book.deleteMany();
         await Book.insertMany(seedData);
-        console.log('Data imported successfully.');
+        console.log('Seeding database completed successfully.');
         process.exit();
     } 
     catch (err) {
-        console.error(`Error seeding database: ${err.message}`);
+        console.error(err);
         process.exit(1);
     }
 };
