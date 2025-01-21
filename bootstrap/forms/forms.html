@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Forms</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  </head>
+  <body>
+<div class="mt-4">
+
+    <!-- Form elements -->
+    <form>
+        <div class="mb-3">
+            <label class="form-label m-1" for="user-name">Username: </label>
+            <input class="form-control m-1" type="text" name="user-name" id="user-name" placeholder="Username">
+        </div>
+        <div class="mb-3">
+            <label class="form-label m-1" for="user-email">Email: </label>
+            <input class="form-control m-1" type="email" name="user-email" id="user-email">
+        </div>
+        <div class="mb-3">
+            <label class="form-label m-1" for="user-age">Age: </label>
+            <input class="form-control m-1" type="number" name="user-age" id="user-age" min="18" max="65" minlength="20">
+        </div>
+        <div class="mb-3">
+            <label class="form-label m-1" for="user-file">File: </label>
+            <input class="form-control m-1" type="file" name="user-file" id="user-file">
+        </div>
+    </form>
+</div>
+
+<!-- Data list -->
+<div class="datalist">
+    <label for="exampleDataList" class="form-label">Datalist example</label>
+<input class="form-control" list="datalistOptions" id="exampleDataList" placeholder="Type to search...">
+<datalist id="datalistOptions">
+  <option value="San Francisco">
+  <option value="New York">
+  <option value="Seattle">
+  <option value="Los Angeles">
+  <option value="Chicago">
+</datalist>
+</div>
+<div class="row">
+    <div class="col-8 mx-auto">
+        <form>
+            <div class="mb-3">
+                <label for="numbers">Numbers</label>
+                <select class="form-select form-select-lg" name="numbers" id="numbers">
+                    <option value="1">One</option>
+                    <option value="2">Two</option>
+                    <option value="3">Three</option>
+                    <option value="4">Four</option>
+                    <option value="5">Five</option>
+                </select>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- Checkbox -->
+<div class="mb-3 form-check">
+    <label for="check1">Check 1</label>
+    <input type="checkbox" class="form-check-input" id="check1"> <br>
+    <label for="check2">Check 2</label>
+    <input type="checkbox" class="form-check-input" id="check2"><br>
+    <label for="check3">Check 3</label>
+    <input type="checkbox" class="form-check-input" id="check3"><br>
+    <label for="check4">Check 4</label>
+    <input type="checkbox" class="form-check-input" id="check4">
+</div>
+
+<!-- Radio buttons -->
+<div class="mb-3 form-check">
+    <div class="form-check form-check-inline">
+        <label for="radio1">Radio 1</label>
+        <input type="radio" name="radio-test" class="form-check-input" id="radio1">
+    </div>
+    <div class="form-check form-check-inline">
+        <label for="radio2">Radio 2</label>
+        <input type="radio" name="radio-test" id="radio2" class="form-check-input">
+    </div>
+    <div class="form-check form-check-inline">
+        <label for="radio3">Radio 3</label>
+        <input type="radio" name="radio-test" id="radio3" class="form-check-input">
+    </div>
+    <div class="form-check form-check-inline">
+        <label for="radio4">Radio 4</label>
+        <input type="radio" name="radio-test" id="radio4" class="form-check-input">
+    </div>
+</div>
+
+<div> <!-- We cannot limit of checkbox selection unless we use JavaScript. -->
+<form id="checkboxForm">
+    <label><input type="checkbox" class="limited-checkbox" value="Option 1"> Option 1</label><br>
+    <label><input type="checkbox" class="limited-checkbox" value="Option 2"> Option 2</label><br>
+    <label><input type="checkbox" class="limited-checkbox" value="Option 3"> Option 3</label><br>
+    <label><input type="checkbox" class="limited-checkbox" value="Option 4"> Option 4</label><br>
+    <label><input type="checkbox" class="limited-checkbox" value="Option 5"> Option 5</label><br>
+    <button type="submit">Submit</button>
+</form>
+
+<script>
+    // Select all checkboxes
+const checkboxes = document.querySelectorAll('.limited-checkbox');
+
+checkboxes.forEach(checkbox => {
+    checkbox.addEventListener('change', () => {
+        // Get the number of selected checkboxes
+        const checkedCount = document.querySelectorAll('.limited-checkbox:checked').length;
+
+        // If more than 3 are selected, uncheck the last clicked checkbox
+        if (checkedCount > 3) {
+            checkbox.checked = false;
+            alert('You can select a maximum of 3 options.');
+        }
+    });
+});
+</script>
+</div>
+
+
+<!-- Switch checkbox -->
+<div class="form-check form-switch">
+    <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
+    <label class="form-check-label" for="flexSwitchCheckDefault">Default switch checkbox input</label>
+  </div>
+  <div class="form-check form-switch">
+    <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" checked>
+    <label class="form-check-label" for="flexSwitchCheckChecked">Checked switch checkbox input</label>
+  </div>
+
+ <!-- .form-check-reverse puts checkboxes, radio buttons, and switchhes on the opposite side. -->
+<div class="form-check form-switch form-check-reverse">
+    <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
+    <label class="form-check-label" for="flexSwitchCheckDefault">Default switch checkbox input</label>
+  </div>
+  <div class="form-check form-switch form-check-reverse">
+    <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" checked>
+    <label class="form-check-label" for="flexSwitchCheckChecked">Checked switch checkbox input</label>
+</div>
+
+<!-- Range -->
+<div class="row">
+    <div class="col-4">
+        <label for="customRange1" class="form-label">Price range</label>
+        <input type="range" class="form-range" id="customRange1" min="10" max="200"  oninput="this.nextElementSibling.value = this.value">
+        <output for="customRange1" id="rangeValue">$$</output>
+    </div>
+</div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+  </body>
+</html>

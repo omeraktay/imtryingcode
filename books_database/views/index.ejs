@@ -12,9 +12,9 @@
        <table class="table table-bordered">
         <thead>
             <tr>
-                <th>ID</th>
-                <th>Tags</th>
+                <th>Id</th>
                 <th>Serial Number</th>
+                <th>Tags</th>
                 <th>Publisher</th>
                 <th>Inventory</th>
                 <th>Units Sold</th>
@@ -24,8 +24,8 @@
             <% inventory.forEach(book => { %>
                 <tr>
                     <td><%- book.id %></td>
-                    <td><%- book.tags %></td>
                     <td><%- book.serial %></td>
+                    <td><%- book.tags %></td>
                     <td><%- book.publishingCompany %></td>
                     <td><%- book.inventory %></td>
                     <td><%- book.unitsSold %></td>

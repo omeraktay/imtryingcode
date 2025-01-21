@@ -2,10 +2,10 @@ import mongoose from "mongoose";
 
 const connectDB = async () => {
     try {
-        const conn = await mongoose.connect('mongodb://localhost:27017/MyBookInventory');
+        const conn = await mongoose.connect('mongodb://localhost:27017/MyBooksDatabase')
         console.log(`Connected to MongoDB: ${conn.connection.host}`);
-    } catch (error) {
-        console.error(`Error connecting dataabase: ${error}`);
+    } catch (err) {
+        console.log(`Error connecting Mongodb: ${err}`);
         process.exit(1);
     }
 };

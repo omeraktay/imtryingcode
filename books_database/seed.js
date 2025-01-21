@@ -1,7 +1,7 @@
 import Book from "./models/Books.js";
 import connectDB from "./config/db.js";
 
-const seedData = [
+const seedData =[
     {
         "id": 11,
         "serial": "76x87PCY",
@@ -89,11 +89,11 @@ const seedDB = async () => {
         await connectDB();
         await Book.deleteMany();
         await Book.insertMany(seedData);
-        console.log('Seeding database completed successfully.');
+        console.log(`Seeding database completed successfully.`);
         process.exit();
-    } 
-    catch (err) {
-        console.error(err);
+    }
+     catch (err) {
+        console.log(`Error seeding database`);
         process.exit(1);
     }
 };
