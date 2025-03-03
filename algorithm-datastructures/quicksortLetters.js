@@ -13,12 +13,12 @@ const groceryList = [
 function quickSort(arr){
     let n = arr.length;
     if(n <= 1) return arr;
-    const pivotIndex = Math.floor(Math.random() * n);
-    const pivot = arr[pivotIndex];
-    const left = [];
-    const right = [];
+    let pivotIndex = Math.floor(Math.random() * n);
+    let pivot = arr[pivotIndex];
+    let left = [];
+    let right = [];
     for(let i = 0; i < n; i++){
-        if(i === pivotIndex) continue;
+        if(pivotIndex === i) continue;
         if(arr[i].localeCompare(pivot) < 0){
             left.push(arr[i]);
         }
@@ -27,6 +27,6 @@ function quickSort(arr){
         }
     }
     return [...quickSort(left), pivot, ...quickSort(right)];
-};
+}
 
 console.log(quickSort(groceryList));
