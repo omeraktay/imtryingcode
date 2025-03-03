@@ -120,3 +120,15 @@ console.log(socialNetwork.degreeOfSeparation("Omer", "Mustafa")); // No connecti
 
 socialNetwork.updatePerson("Ali", "Oguz"); // Ali not found.
 console.log(socialNetwork);
+/*
+SocialNetwork {
+  graph: Map(6) {
+    'Omer' => Set(1) { 'Oguz' },
+    'Zeki' => Set(2) { 'Samet', 'Oguz' },
+    'Samet' => Set(1) { 'Zeki' },
+    'Emre' => Set(1) { 'Oguz' },
+    'Mustafa' => Set(0) {},
+    'Oguz' => Set(3) { 'Omer', 'Zeki', 'Emre' }
+  }
+}
+*/
