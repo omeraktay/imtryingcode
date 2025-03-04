@@ -86,7 +86,7 @@ class SocialNetwork{
         while(queue.length){
             let [ current, degree ] = queue.shift();
             if(current === target){
-                return `Degree of separation is: ${degree}.`
+                return `Degree of separation is: ${degree}.`;
             }
             for(let friend of this.graph.get(current)){
                 if(!visited.has(friend)){
