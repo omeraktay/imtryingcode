@@ -15,7 +15,7 @@ chosen for the social network, and instructions on running the application.
 Include examples illustrating how to calculate degrees of separation.
 */
 
-// Grap data structure 
+// Graph data structure 
 
 //        (1)    +    (1)   +    (1)
 // Omer -----> Osman ----> Zeki ----> Samet  =>   Degree of separation between Omer and Samet is 3.

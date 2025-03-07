@@ -1,0 +1,25 @@
+.container {
+  display: flex;
+}
+.container div {
+  margin: 5px;
+}
+
+.box1, .box2, .box3 {
+  background-color: blue;
+  margin: 10px;
+  width: 150px;
+  height: 100px;
+}
+
+.box2, .box3 {
+  width: 200px;
+  background-color: red;
+}
+
+.box4 {
+  background-color: green;
+  margin: 10px;
+  width: 100px;
+  height: 150px;
+}
