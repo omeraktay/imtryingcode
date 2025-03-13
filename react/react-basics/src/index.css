@@ -1,0 +1,6 @@
+#cardId:hover{
+  transform: scale(1.05);
+  box-shadow: 4px 4px 15px rgba(37, 99, 235, 0.3);
+  background: #eff6ff; /* Light blue on hover */
+  transition: transform 0.4s, box-shadow 0.4s;
+}
