@@ -42,9 +42,7 @@ input[type= "checkbox"]{
   gap: 1rem;
 }
 
-.form button,
-select,
-input {
+.form button, select, input {
   background-color: #EEDF7A;
   color: #000;
   border: none;
