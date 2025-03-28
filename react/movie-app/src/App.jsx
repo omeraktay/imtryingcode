@@ -1,63 +1,40 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
-const movie_list = [
-  {
-    Id: "769",
-    Title: "GoodFellas",
-    Year: "1990",
-    Poster:
-      "https://image.tmdb.org/t/p/original/aKuFiU82s5ISJpGZp7YkIr3kCUd.jpg",
-  },
-  {
-    Id: "120",
-    Title: "The Lord of the Rings",
-    Year: "2001",
-    Poster:
-      "https://image.tmdb.org/t/p/original/6oom5QYQ2yQTMJIbnvbkBL9cHo6.jpg",
-  },
-  {
-    Id: "27205",
-    Title: "Inception",
-    Year: "2010",
-    Poster:
-      "https://image.tmdb.org/t/p/original/ljsZTbVsrQSqZgWeep2B1QiDKuh.jpg",
-  },
-  
-  {
-    Id: "105",
-    Title: "Back to the Future",
-    Year: "1985",
-    Poster:
-      "https://image.tmdb.org/t/p/original/fNOH9f1aA7XRTzl1sAOx9iF553Q.jpg",
-  },
-];
+const getAverage = (array) => array.reduce((sum, value) => sum + value / array.length, 0);
 
-const selected_movie_list = [
-  {
-    Id: "769",
-    Title: "GoodFellas",
-    Year: "1990",
-    Poster:
-      "https://image.tmdb.org/t/p/original/aKuFiU82s5ISJpGZp7YkIr3kCUd.jpg",
-    Duration: 120,
-    Rating: 8.4
-  },
-  {
-    Id: "120",
-    Title: "The Lord of the Rings",
-    Year: "2001",
-    Poster:
-      "https://image.tmdb.org/t/p/original/6oom5QYQ2yQTMJIbnvbkBL9cHo6.jpg",
-      Duration: 125,
-      Rating: 8.8
-  }
-];
-
-const getAverage = (array) => array.reduce((sum, value) => sum + value, 0) / array.length;
+const api_key = "be512d823a55f1c8498820c2938aa561";
+const query = 'father'
 
 export default function App() {
-  const [movies, setMovies] = useState(movie_list);
-  const [selectedMovies, setSelectedMovies] = useState(selected_movie_list);
+  const [movies, setMovies] = useState([]);
+  const [selectedMovies, setSelectedMovies] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
+
+  useEffect(() => {    
+    async function getMovies() {
+      try{
+        setLoading(true);
+        setError('');
+        const res = await fetch(`https://api.themoviedb.org/3/search/movie?api_key=${api_key}&query=${query}`)
+        if(!res.ok){
+          throw new Error("Unknown error.")
+        }
+        const data = await res.json();
+        if(data.total_results === 0){
+          throw new Error("Movie not found");
+        }
+        setMovies(data.results)
+      }
+      catch(err){
+        setError(err.message);
+      }
+      setLoading(false);
+    }
+    getMovies();
+  }, [])
+
+
   return (
     <>
     <Nav movies={movies}>
@@ -69,7 +46,10 @@ export default function App() {
     <div className="row mt-2">
       <div className="col-md-9 mb-2">
         <ListContainer>
-          <MovieList movies={movies}/>
+          {/* {loading ? <Loading /> : <MovieList movies={movies}/>} */}
+          {loading && <Loading /> }
+          {!loading && !error && <MovieList movies={movies}/>}
+          {error && <ErrorMessage message={error} />}
         </ListContainer>
       </div>
       <div className="col-md-3">
@@ -84,6 +64,18 @@ export default function App() {
     </Main>
     </>
   );
+}
+
+function ErrorMessage({message}){
+  return <div className="alert alert-primary">{message}</div>
+}
+
+function Loading(){
+  return(
+    <div className="spinner-border text-primary" role="status">
+      <span className="visually-hidden">Loading...</span>
+    </div>
+  )
 }
 
 function Nav({children}){
@@ -149,7 +141,7 @@ function MovieList({movies}){
     (
       <div className="row row-cols-sm-2 row-cols-md-3 row-cols-xl-4 g-4">
         {movies.map((movie) => (
-          <Movie movie={movie} key={movie.Id}/>
+          <Movie movie={movie} key={movie.id}/>
         ))}
       </div>
     )
@@ -160,12 +152,16 @@ function Movie({movie}){
 
     <div className="col-mb-2">
     <div className="card">
-      <img src={movie.Poster} alt={movie.Title} className="card-img-top"/>
+      <img src={
+        movie.poster_path ?
+        `https://media.themoviedb.org/t/p/w440_and_h660_face` + movie.poster_path 
+        : './img/no-image.jpg'
+      } alt={movie.title} className="card-img-top"/>
       <div className="card-body">
-        <h6 className="card-title">{movie.Title}</h6>
+        <h6 className="card-title">{movie.title}</h6>
         <div>
         <i className="bi bi-calendar-date me-1"></i>
-        <span>{movie.Year}</span>
+        <span>{movie.release_date}</span>
         </div>
       </div>
     </div>
@@ -194,8 +190,8 @@ function Movie({movie}){
 // }
 
 function MyListSummary({selectedMovies}){
-  const avgRating = getAverage(selected_movie_list.map(m => m.Rating))
-  const avgDuration = getAverage(selected_movie_list.map(m => m.Duration))
+  const avgRating = getAverage(selectedMovies.map(m => m.Rating))
+  const avgDuration = getAverage(selectedMovies.map(m => m.Duration))
   return(
     <div className="card mb-2">
     <div className="card-body">
@@ -217,7 +213,7 @@ function MyListSummary({selectedMovies}){
 function MyMovieList({selectedMovies}){
   return(
     selectedMovies.map((movie) => (
-      <MyListMovie movie={movie} key={movie.Id} />
+      <MyListMovie movie={movie} key={movie.id} />
     ))
   )
 }
