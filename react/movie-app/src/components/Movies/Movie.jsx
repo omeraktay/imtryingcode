@@ -6,7 +6,7 @@ export default function Movie({movie, onSelectMovie, selectedMovie}){
         <img src={
           movie.poster_path ?
           `https://media.themoviedb.org/t/p/w440_and_h660_face` + movie.poster_path 
-          : './img/no-image.jpg'
+          : '/img/no-image.jpg'
         } alt={movie.title} className="card-img-top"/>
         <div className="card-body">
           <h6 className="card-title">{movie.title}</h6>
