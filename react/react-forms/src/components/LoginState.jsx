@@ -1,27 +1,15 @@
 import { useState } from "react";
+import Input from "./Input";
+import useInput from "../hooks/useInputs";
 
 export default function Login() {
-
-  // const[newEmail, setNewEmail] = useState('aa');
-  // const[newpassword, setNewEPassword] = useState('ss');
-
-  // const [values, setValues] = useState({email: '', password: ''});
-
-  const initialValues = {email: '', password: ''};
-  const [values, setValues] = useState(initialValues);
+  const {value: emailValue, handleInputChange: handleEmailChange, handleInputBlur: handleEmailBlur, isEdited: isEmailEditted} = useInput("");
+  const {value: passwordValue, handleInputChange: handlePasswordChange, handleInputBlur: handlePasswordBlur, isEdited: isPasswordEditted} = useInput("");
+  const emailIsInvalid = isEmailEditted && !emailValue.includes("@");
+  const passwordIsInvalid = isPasswordEditted && passwordValue.length <= 5;
 
   function handleSubmit(e){
     e.preventDefault();
-    console.log(values)
-  }
-  function handleInputChange(e){
-    const name = e.target.name;
-    const value = e.target.value;
-
-    setValues({
-      ...values,
-      [name] : value
-    })
   }
 
   return (
@@ -30,19 +18,8 @@ export default function Login() {
         <h1>Login</h1>
         <p>Please enter your email and password!</p>
       </div>
-
-      <div className="mb-3">
-        <label htmlFor="email" className="form-label">
-          Email
-        </label>
-        <input type="email" className="form-control" id="email" name="email" value={values.email} onChange={handleInputChange}/>
-      </div>
-      <div className="mb-4">
-        <label htmlFor="password" className="form-label">
-          Password
-        </label>
-        <input type="password" className="form-control" id="password" name="password" value={values.password} onChange={handleInputChange}/>
-      </div>
+      <Input type="email" name="email" labelText="Email" id="email" error={emailIsInvalid && "Enter valid email"} value={emailValue} onChange={handleEmailChange} onBlur={handleEmailBlur}/>
+      <Input type="password" name="password" labelText="Password" id="password" error={passwordIsInvalid && "Password must be at least 6 character"} value={passwordValue} onChange={handlePasswordChange} onBlur={handlePasswordBlur}/>
       <div className="mb-3">
         <button className="btn btn-outline-warning me-2">Submit</button>
         <button className="btn btn-outline-light">Reset</button>
